@@ -138,11 +138,11 @@ public class DiscoveryLogic extends ShardIndexQueryTable {
         }
         
         // Get the MAX_RESULTS_OVERRIDE parameter if given
-        if (null != settings.findParameter(QueryParameters.MAX_RESULTS_OVERRIDE)
-                        && null != settings.findParameter(QueryParameters.MAX_RESULTS_OVERRIDE).getParameterValue()
-                        && !settings.findParameter(QueryParameters.MAX_RESULTS_OVERRIDE).getParameterValue().isEmpty()) {
+        if (null != settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE)
+                        && null != settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue()
+                        && !settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue().isEmpty()) {
             try {
-                long override = Long.parseLong(settings.findParameter(QueryParameters.MAX_RESULTS_OVERRIDE).getParameterValue());
+                long override = Long.parseLong(settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue());
                 
                 if (override < config.getMaxQueryResults()) {
                     config.setMaxQueryResults(override);
@@ -151,8 +151,8 @@ public class DiscoveryLogic extends ShardIndexQueryTable {
                     this.setMaxResults(override);
                 }
             } catch (NumberFormatException nfe) {
-                log.error(QueryParameters.MAX_RESULTS_OVERRIDE + " query parameter is not a valid number: "
-                                + settings.findParameter(QueryParameters.MAX_RESULTS_OVERRIDE).getParameterValue() + ", using default value");
+                log.error(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE + " query parameter is not a valid number: "
+                                + settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue() + ", using default value");
             }
         }
         

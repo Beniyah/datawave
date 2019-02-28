@@ -1850,7 +1850,7 @@ public class ShardQueryLogic extends BaseQueryLogic<Entry<Key,Value>> {
         params.add(QueryParameters.DATATYPE_FILTER_SET);
         params.add(QueryParameters.RETURN_FIELDS);
         params.add(QueryParameters.BLACKLISTED_FIELDS);
-        params.add(QueryParameters.MAX_RESULTS_OVERRIDE);
+        params.add(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE);
         params.add(QueryParameters.FILTER_MASKED_VALUES);
         params.add(QueryParameters.INCLUDE_DATATYPE_AS_FIELD);
         params.add(QueryParameters.INCLUDE_GROUPING_CONTEXT);
