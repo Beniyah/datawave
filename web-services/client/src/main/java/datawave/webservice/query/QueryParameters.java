@@ -43,9 +43,9 @@ public interface QueryParameters extends ParameterValidator {
     
     void setPageTimeout(int pageTimeout);
 
-    int getMaxResultsOverride();
+    long getMaxResultsOverride();
 
-    void setMaxResultsOverride(int maxResults);
+    void setMaxResultsOverride(long maxResults);
 
     boolean isMaxResultsOverridden();
 

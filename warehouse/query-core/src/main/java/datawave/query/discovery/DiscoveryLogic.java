@@ -137,25 +137,6 @@ public class DiscoveryLogic extends ShardIndexQueryTable {
             }
         }
         
-        // Get the MAX_RESULTS_OVERRIDE parameter if given
-        if (null != settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE)
-                        && null != settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue()
-                        && !settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue().isEmpty()) {
-            try {
-                long override = Long.parseLong(settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue());
-                
-                if (override < config.getMaxQueryResults()) {
-                    config.setMaxQueryResults(override);
-                    // this.maxresults is initially set to the value in the config, we are overriding it here for this instance
-                    // of the query.
-                    this.setMaxResults(override);
-                }
-            } catch (NumberFormatException nfe) {
-                log.error(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE + " query parameter is not a valid number: "
-                                + settings.findParameter(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE).getParameterValue() + ", using default value");
-            }
-        }
-        
         // Set the connector
         config.setConnector(connection);
         

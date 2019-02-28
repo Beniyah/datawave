@@ -25,7 +25,7 @@ public class QueryParametersImpl implements QueryParameters {
     protected QueryPersistence persistenceMode;
     protected int pagesize;
     protected int pageTimeout;
-    protected int maxResultsOverride;
+    protected long maxResultsOverride;
     protected String auths;
     protected Date expirationDate;
     protected boolean trace;
@@ -61,7 +61,7 @@ public class QueryParametersImpl implements QueryParameters {
             } else if (QUERY_PAGETIMEOUT.equals(param)) {
                 this.pageTimeout = Integer.parseInt(values.get(0));
             } else if (QUERY_MAX_RESULTS_OVERRIDE.equals(param)) {
-                this.maxResultsOverride = Integer.parseInt(values.get(0));
+                this.maxResultsOverride = Long.parseLong(values.get(0));
             } else if (QUERY_AUTHORIZATIONS.equals(param)) {
                 // ensure that auths are comma separated with no empty values or spaces
                 Splitter splitter = Splitter.on(',').omitEmptyStrings().trimResults();
@@ -148,7 +148,7 @@ public class QueryParametersImpl implements QueryParameters {
         result = 31 * result + persistenceMode.hashCode();
         result = 31 * result + pagesize;
         result = 31 * result + pageTimeout;
-        result = 31 * result + maxResultsOverride;
+        result = 31 * result + (int)(maxResultsOverride);
         result = 31 * result + auths.hashCode();
         result = 31 * result + expirationDate.hashCode();
         result = 31 * result + (trace ? 1 : 0);
@@ -246,7 +246,7 @@ public class QueryParametersImpl implements QueryParameters {
      *             on date parse/format error
      */
     public static MultivaluedMap<String,String> paramsToMap(String queryLogicName, String query, String queryName, String queryVisibility, Date beginDate,
-                    Date endDate, String queryAuthorizations, Date expirationDate, Integer pagesize, Integer pageTimeout, Integer maxResultsOverride, QueryPersistence persistenceMode,
+                    Date endDate, String queryAuthorizations, Date expirationDate, Integer pagesize, Integer pageTimeout, Long maxResultsOverride, QueryPersistence persistenceMode,
                     String parameters, Boolean trace) throws ParseException {
         
         MultivaluedMap<String,String> p = new MultivaluedMapImpl<String,String>();
@@ -349,12 +349,12 @@ public class QueryParametersImpl implements QueryParameters {
     }
 
     @Override
-    public int getMaxResultsOverride() {
+    public long getMaxResultsOverride() {
         return maxResultsOverride;
     }
 
     @Override
-    public void setMaxResultsOverride(int maxResultsOverride) {
+    public void setMaxResultsOverride(long maxResultsOverride) {
         this.maxResultsOverride = maxResultsOverride;
     }
 

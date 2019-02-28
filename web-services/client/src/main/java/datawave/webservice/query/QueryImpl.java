@@ -218,6 +218,8 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     @XmlElement
     protected int pageTimeout;
     @XmlElement
+    protected int maxResultsOverride;
+    @XmlElement
     protected HashSet<Parameter> parameters = new HashSet<Parameter>();
     @XmlElement
     protected List<String> dnList;
@@ -269,6 +271,10 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     public int getPageTimeout() {
         return pageTimeout;
     }
+
+    public int getMaxResultsOverride() {
+        return maxResultsOverride;
+    }
     
     public Set<Parameter> getParameters() {
         return parameters == null ? null : Collections.unmodifiableSet(parameters);
@@ -300,6 +306,10 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public void setMaxResultsOverride(int maxResults) {
+        this.maxResultsOverride = maxResults;
     }
     
     public void setPagesize(int pagesize) {
@@ -388,6 +398,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
         query.setId(UUID.randomUUID());
         query.setPagesize(this.getPagesize());
         query.setPageTimeout(this.getPageTimeout());
+        query.setMaxResultsOverride(this.getMaxResultsOverride());
         query.setQuery(this.getQuery());
         query.setQueryAuthorizations(this.getQueryAuthorizations());
         query.setUserDN(this.getUserDN());
@@ -404,7 +415,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37).append(this.getQueryLogicName()).append(this.getQueryName()).append(this.getExpirationDate())
-                        .append(UUID.randomUUID()).append(this.getPagesize()).append(this.getPageTimeout()).append(this.getQuery())
+                        .append(UUID.randomUUID()).append(this.getPagesize()).append(this.getPageTimeout()).append(this.getMaxResultsOverride()).append(this.getQuery())
                         .append(this.getQueryAuthorizations()).append(this.getUserDN()).append(this.getOwner()).append(this.getParameters())
                         .append(this.getDnList()).append(this.getColumnVisibility()).append(this.getBeginDate()).append(this.getEndDate()).toHashCode();
     }
@@ -418,6 +429,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
         tsb.append("uuid", this.getId());
         tsb.append("pagesize", this.getPagesize());
         tsb.append("pageTimeout", this.getPageTimeout());
+        tsb.append("maxResultsOverride", this.getMaxResultsOverride());
         tsb.append("query", this.getQuery());
         tsb.append("queryAuthorizations", this.getQueryAuthorizations());
         tsb.append("userDN", this.getUserDN());
@@ -450,6 +462,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
         eb.append(this.getExpirationDate(), other.getExpirationDate());
         eb.append(this.getPagesize(), other.getPagesize());
         eb.append(this.getPageTimeout(), other.getPageTimeout());
+        eb.append(this.getMaxResultsOverride(), other.getMaxResultsOverride());
         eb.append(this.getColumnVisibility(), other.getColumnVisibility());
         eb.append(this.getBeginDate(), other.getBeginDate());
         eb.append(this.getEndDate(), other.getEndDate());

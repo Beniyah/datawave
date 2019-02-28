@@ -206,6 +206,8 @@ public interface QueryExecutor {
      *            - number of results to return on each call to next() (optional)
      * @param newPageTimeout
      *            - specify timeout (in minutes) for each call to next(), default to -1 for disabled (optional)
+     * @param newMaxResultsOverride
+     *            - max results (optional)
      * @param newPersistenceMode
      *            - indicates whether or not the query is persistent (optional)
      * @param newParameters
@@ -213,7 +215,7 @@ public interface QueryExecutor {
      * @return base response
      */
     GenericResponse<String> updateQuery(String id, String queryLogicName, String newQuery, String newColumnVisibility, Date newBeginDate, Date newEndDate,
-                    String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout, QueryPersistence newPersistenceMode,
+                    String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout, Long newMaxResultsOverride, QueryPersistence newPersistenceMode,
                     String newParameters);
     
     /**
@@ -241,6 +243,8 @@ public interface QueryExecutor {
      *            - number of results to return on each call to next() (optional)
      * @param newPageTimeout
      *            - specify timeout (in minutes) for each call to next(), default to -1 for disabled (optional)
+     * @param newMaxResultsOverride
+     *            - max results (optional)
      * @param newPersistenceMode
      *            - indicates whether or not the query is persistent (optional)
      * @param newParameters
@@ -250,7 +254,7 @@ public interface QueryExecutor {
      * @return the new query ID in the result element
      */
     GenericResponse<String> duplicateQuery(String id, String newQueryName, String newQueryLogicName, String newQuery, String newColumnVisibility,
-                    Date newBeginDate, Date newEndDate, String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout,
+                    Date newBeginDate, Date newEndDate, String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout, Long newMaxResultsOverride,
                     QueryPersistence newPersistenceMode, String newParameters, boolean trace);
     
     /**
