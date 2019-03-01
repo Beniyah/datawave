@@ -1320,7 +1320,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime - 500);
         int pagesize = 1;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = null;
         boolean trace = false;
@@ -1362,7 +1362,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime);
         int pagesize = 0;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = null;
         boolean trace = false;
@@ -1404,7 +1404,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 1000;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = null;
         boolean trace = false;
@@ -1470,7 +1470,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 999999);
         int pagesize = 1;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = null;
         boolean trace = false;
@@ -1520,7 +1520,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime - 500);
         int pagesize = 1;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = null;
         boolean trace = false;
@@ -1561,7 +1561,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime);
         int pagesize = 0;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = null;
         
@@ -1603,7 +1603,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 10000);
         int pagesize = 10;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String userName = "userName";
         String userSid = "userSid";
@@ -1741,6 +1741,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = true;
@@ -1834,7 +1835,7 @@ public class ExtendedQueryExecutorBeanTest {
         setInternalState(subject, QueryParameters.class, new QueryParametersImpl());
         setInternalState(subject, QueryMetricFactory.class, new QueryMetricFactoryImpl());
         GenericResponse<String> result1 = subject.duplicateQuery(queryId.toString(), newQueryName, queryLogicName, query, queryVisibility, beginDate, endDate,
-                        queryAuthorizations, expirationDate, pagesize, pageTimeout, persistenceMode, parameters, trace);
+                        queryAuthorizations, expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode, parameters, trace);
         PowerMock.verifyAll();
         
         // Verify results
@@ -1856,6 +1857,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = false;
@@ -1885,7 +1887,7 @@ public class ExtendedQueryExecutorBeanTest {
         
         try {
             subject.duplicateQuery(queryId.toString(), queryName, queryLogicName, query, queryVisibility, beginDate, endDate, queryAuthorizations,
-                            expirationDate, pagesize, pageTimeout, persistenceMode, parameters, trace);
+                            expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode, parameters, trace);
         } finally {
             PowerMock.verifyAll();
         }
@@ -1907,6 +1909,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = true;
@@ -1981,6 +1984,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = true;
@@ -2018,6 +2022,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = true;
@@ -2910,6 +2915,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         String userName = "userName";
@@ -3008,6 +3014,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = false;
@@ -3085,7 +3092,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pagesize = 10;
         int pageTimeout = -1;
-        Integer maxResultsOverride = null;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         boolean trace = false;

@@ -21,8 +21,8 @@ public class DashboardQuery {
     private static final boolean trace = false;
     private static final int pageSize = 10000;
     private static final int pageTimeout = -1;
-    private static final Integer maxResultsOverride = null;
-    
+    private static final Long maxResultsOverride = null;
+
     private DashboardQuery() {}
     
     @SuppressWarnings("unchecked")
