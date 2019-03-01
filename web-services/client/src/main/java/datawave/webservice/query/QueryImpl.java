@@ -218,7 +218,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     @XmlElement
     protected int pageTimeout;
     @XmlElement
-    protected int maxResultsOverride;
+    protected long maxResultsOverride;
     @XmlElement
     protected HashSet<Parameter> parameters = new HashSet<Parameter>();
     @XmlElement
@@ -272,7 +272,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
         return pageTimeout;
     }
 
-    public int getMaxResultsOverride() {
+    public long getMaxResultsOverride() {
         return maxResultsOverride;
     }
     
@@ -308,7 +308,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
         this.expirationDate = expirationDate;
     }
 
-    public void setMaxResultsOverride(int maxResults) {
+    public void setMaxResultsOverride(long maxResults) {
         this.maxResultsOverride = maxResults;
     }
     
