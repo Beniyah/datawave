@@ -689,7 +689,6 @@ public class EdgeQueryLogic extends BaseQueryLogic<Entry<Key,Value>> {
         params.add(datawave.webservice.query.QueryParameters.QUERY_BEGIN);
         params.add(datawave.webservice.query.QueryParameters.QUERY_END);
         params.add(QueryParameters.DATATYPE_FILTER_SET);
-        params.add(datawave.webservice.query.QueryParameters.QUERY_MAX_RESULTS_OVERRIDE);
         params.add(EdgeQueryConfiguration.INCLUDE_STATS);
         params.add(EdgeQueryConfiguration.DATE_RANGE_TYPE);
         return params;
