@@ -17,8 +17,9 @@ import java.util.Map;
 
 public class QueryParametersImpl implements QueryParameters {
     
-    private static final List<String> KNOWN_PARAMS = Arrays.asList(QUERY_STRING, QUERY_NAME, QUERY_PERSISTENCE, QUERY_PAGESIZE, QUERY_PAGETIMEOUT,
-                    QUERY_AUTHORIZATIONS, QUERY_EXPIRATION, QUERY_TRACE, QUERY_BEGIN, QUERY_END, QUERY_VISIBILITY, QUERY_LOGIC_NAME, QUERY_MAX_RESULTS_OVERRIDE);
+    private static final List<String> KNOWN_PARAMS = Arrays
+                    .asList(QUERY_STRING, QUERY_NAME, QUERY_PERSISTENCE, QUERY_PAGESIZE, QUERY_PAGETIMEOUT, QUERY_AUTHORIZATIONS, QUERY_EXPIRATION,
+                                    QUERY_TRACE, QUERY_BEGIN, QUERY_END, QUERY_VISIBILITY, QUERY_LOGIC_NAME, QUERY_MAX_RESULTS_OVERRIDE);
     
     protected String query;
     protected String queryName;
@@ -34,7 +35,7 @@ public class QueryParametersImpl implements QueryParameters {
     protected String visibility;
     protected String logicName;
     protected MultivaluedMap<String,String> requestHeaders;
-
+    
     public static final int MAX_RESULTS_OVERRIDE_UNSET = Integer.MIN_VALUE;
     
     public QueryParametersImpl() {
@@ -148,7 +149,7 @@ public class QueryParametersImpl implements QueryParameters {
         result = 31 * result + persistenceMode.hashCode();
         result = 31 * result + pagesize;
         result = 31 * result + pageTimeout;
-        result = 31 * result + (int)(maxResultsOverride);
+        result = 31 * result + (int) (maxResultsOverride);
         result = 31 * result + auths.hashCode();
         result = 31 * result + expirationDate.hashCode();
         result = 31 * result + (trace ? 1 : 0);
@@ -246,8 +247,8 @@ public class QueryParametersImpl implements QueryParameters {
      *             on date parse/format error
      */
     public static MultivaluedMap<String,String> paramsToMap(String queryLogicName, String query, String queryName, String queryVisibility, Date beginDate,
-                    Date endDate, String queryAuthorizations, Date expirationDate, Integer pagesize, Integer pageTimeout, Long maxResultsOverride, QueryPersistence persistenceMode,
-                    String parameters, Boolean trace) throws ParseException {
+                    Date endDate, String queryAuthorizations, Date expirationDate, Integer pagesize, Integer pageTimeout, Long maxResultsOverride,
+                    QueryPersistence persistenceMode, String parameters, Boolean trace) throws ParseException {
         
         MultivaluedMap<String,String> p = new MultivaluedMapImpl<String,String>();
         if (queryLogicName != null) {
@@ -347,22 +348,22 @@ public class QueryParametersImpl implements QueryParameters {
     public void setPageTimeout(int pageTimeout) {
         this.pageTimeout = pageTimeout;
     }
-
+    
     @Override
     public long getMaxResultsOverride() {
         return maxResultsOverride;
     }
-
+    
     @Override
     public void setMaxResultsOverride(long maxResultsOverride) {
         this.maxResultsOverride = maxResultsOverride;
     }
-
+    
     @Override
     public boolean isMaxResultsOverridden() {
         return this.maxResultsOverride != MAX_RESULTS_OVERRIDE_UNSET;
     }
-
+    
     @Override
     public String getAuths() {
         return auths;

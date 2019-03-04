@@ -215,8 +215,8 @@ public interface QueryExecutor {
      * @return base response
      */
     GenericResponse<String> updateQuery(String id, String queryLogicName, String newQuery, String newColumnVisibility, Date newBeginDate, Date newEndDate,
-                    String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout, Long newMaxResultsOverride, QueryPersistence newPersistenceMode,
-                    String newParameters);
+                    String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout, Long newMaxResultsOverride,
+                    QueryPersistence newPersistenceMode, String newParameters);
     
     /**
      * Duplicates a query and allows modification of optional properties
@@ -254,8 +254,8 @@ public interface QueryExecutor {
      * @return the new query ID in the result element
      */
     GenericResponse<String> duplicateQuery(String id, String newQueryName, String newQueryLogicName, String newQuery, String newColumnVisibility,
-                    Date newBeginDate, Date newEndDate, String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout, Long newMaxResultsOverride,
-                    QueryPersistence newPersistenceMode, String newParameters, boolean trace);
+                    Date newBeginDate, Date newEndDate, String newQueryAuthorizations, Date newExpirationDate, Integer newPagesize, Integer newPageTimeout,
+                    Long newMaxResultsOverride, QueryPersistence newPersistenceMode, String newParameters, boolean trace);
     
     /**
      * Release the resources associated with this query

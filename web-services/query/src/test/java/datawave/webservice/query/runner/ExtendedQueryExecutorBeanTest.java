@@ -1964,7 +1964,7 @@ public class ExtendedQueryExecutorBeanTest {
         
         try {
             subject.duplicateQuery(queryId.toString(), newQueryName, queryLogicName, query, queryVisibility, beginDate, endDate, queryAuthorizations,
-                            expirationDate, pagesize, pageTimeout, persistenceMode, parameters, trace);
+                            expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode, parameters, trace);
         } finally {
             PowerMock.verifyAll();
         }
@@ -2002,7 +2002,7 @@ public class ExtendedQueryExecutorBeanTest {
         
         try {
             subject.duplicateQuery(queryId.toString(), newQueryName, queryLogicName, query, queryVisibility, beginDate, endDate, queryAuthorizations,
-                            expirationDate, pagesize, pageTimeout, persistenceMode, parameters, trace);
+                            expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode, parameters, trace);
         } finally {
             PowerMock.verifyAll();
         }
@@ -2035,7 +2035,7 @@ public class ExtendedQueryExecutorBeanTest {
         Exception result1 = null;
         try {
             subject.duplicateQuery(queryId.toString(), newQueryName, queryLogicName, query, queryVisibility, beginDate, endDate, queryAuthorizations,
-                            expirationDate, pagesize, pageTimeout, persistenceMode, parameters, trace);
+                            expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode, parameters, trace);
         } catch (DatawaveWebApplicationException e) {
             result1 = e;
         }
@@ -2992,7 +2992,7 @@ public class ExtendedQueryExecutorBeanTest {
         setInternalState(subject, AuditBean.class, auditor);
         setInternalState(subject, QueryMetricFactory.class, new QueryMetricFactoryImpl());
         GenericResponse<String> result1 = subject.updateQuery(queryId.toString(), queryLogicName, query, queryVisibility, beginDate, endDate,
-                        queryAuthorizations, expirationDate, pagesize, pageTimeout, persistenceMode, parameters);
+                        queryAuthorizations, expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode, parameters);
         PowerMock.verifyAll();
         
         // Verify results
@@ -3392,6 +3392,7 @@ public class ExtendedQueryExecutorBeanTest {
         Date expirationDate = new Date(currentTime + 9999);
         int pageTimeout = 60;
         int pagesize = 10;
+        Long maxResultsOverride = null;
         QueryPersistence persistenceMode = QueryPersistence.PERSISTENT;
         String parameters = "invalidparam; valid:param";
         String userName = "userName";
@@ -3462,7 +3463,7 @@ public class ExtendedQueryExecutorBeanTest {
         setInternalState(subject, QueryMetricFactory.class, new QueryMetricFactoryImpl());
         
         subject.updateQuery(queryId.toString(), queryLogicName, query, queryVisibility, beginDate, endDate, queryAuthorizations, expirationDate, pagesize,
-                        pageTimeout, persistenceMode, parameters);
+                        pageTimeout, maxResultsOverride, persistenceMode, parameters);
         PowerMock.verifyAll();
     }
     

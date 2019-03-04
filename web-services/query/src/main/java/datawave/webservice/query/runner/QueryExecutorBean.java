@@ -173,7 +173,7 @@ import static datawave.webservice.query.cache.QueryTraceCache.PatternWrapper;
 @TransactionManagement(TransactionManagementType.BEAN)
 @Exclude(ifProjectStage = DatawaveEmbeddedProjectStageHolder.DatawaveEmbedded.class)
 public class QueryExecutorBean implements QueryExecutor {
-
+    
     private static final String PRIVILEGED_USER = "PrivilegedUser";
     
     private final Logger log = Logger.getLogger(QueryExecutorBean.class);
@@ -403,7 +403,7 @@ public class QueryExecutorBean implements QueryExecutor {
             GenericResponse<String> response = new GenericResponse<>();
             throwBadRequest(DatawaveErrorCode.INVALID_PAGE_TIMEOUT, response);
         }
-
+        
         if (System.currentTimeMillis() >= qp.getExpirationDate().getTime()) {
             GenericResponse<String> response = new GenericResponse<>();
             throwBadRequest(DatawaveErrorCode.INVALID_EXPIRATION_DATE, response);
@@ -438,7 +438,7 @@ public class QueryExecutorBean implements QueryExecutor {
             throw new BadRequestException(qe, response);
         }
         qd.logic.validate(queryParameters);
-
+        
         try {
             marking.clear();
             marking.validate(queryParameters);
@@ -473,7 +473,7 @@ public class QueryExecutorBean implements QueryExecutor {
             response.addException(qe);
             throw new BadRequestException(qe, response);
         }
-
+        
         // validate the max results override relative to the max results on a query logic
         // privileged users however can set whatever they want
         if (qp.isMaxResultsOverridden()) {
@@ -491,7 +491,7 @@ public class QueryExecutorBean implements QueryExecutor {
                 }
             }
         }
-
+        
         // Set private audit-related parameters, stripping off any that the user might have passed in first.
         // These are parameters that aren't passed in by the user, but rather are computed from other sources.
         PrivateAuditConstants.stripPrivateParameters(queryParameters);
@@ -551,8 +551,7 @@ public class QueryExecutorBean implements QueryExecutor {
             AccumuloConnectionFactory.Priority priority = qd.logic.getConnectionPriority();
             
             rq = new RunningQuery(metrics, null, priority, qd.logic, q, qp.getAuths(), qd.p, new RunningQueryTimingImpl(queryExpirationConf,
-                            qp.getPageTimeout()),
-                            this.executor, this.predictor, this.metricFactory);
+                            qp.getPageTimeout()), this.executor, this.predictor, this.metricFactory);
             rq.setActiveCall(true);
             rq.getMetric().setProxyServers(qd.proxyServers);
             rq.setTraceInfo(traceInfo);
@@ -2429,9 +2428,8 @@ public class QueryExecutorBean implements QueryExecutor {
                                     defaultTime = "235959", defaultMillisec = "999") Date newEndDate, @FormParam("auths") String newQueryAuthorizations,
                     @FormParam("expiration") @DateFormat(defaultTime = "235959", defaultMillisec = "999") Date newExpirationDate,
                     @FormParam("pagesize") Integer newPagesize, @FormParam("pageTimeout") Integer newPageTimeout,
-                    @FormParam("maxResultsOverride") Long newMaxResultsOverride,
-                    @FormParam("persistence") QueryPersistence newPersistenceMode, @FormParam("params") String newParameters,
-                    @FormParam("trace") @DefaultValue("false") boolean trace) {
+                    @FormParam("maxResultsOverride") Long newMaxResultsOverride, @FormParam("persistence") QueryPersistence newPersistenceMode,
+                    @FormParam("params") String newParameters, @FormParam("trace") @DefaultValue("false") boolean trace) {
         
         GenericResponse<String> response = new GenericResponse<>();
         
@@ -2560,13 +2558,13 @@ public class QueryExecutorBean implements QueryExecutor {
                                     defaultTime = "235959", defaultMillisec = "999") Date endDate, @FormParam("auths") String queryAuthorizations,
                     @FormParam("expiration") @DateFormat(defaultTime = "235959", defaultMillisec = "999") Date expirationDate,
                     @FormParam("pagesize") Integer pagesize, @FormParam("pageTimeout") Integer pageTimeout,
-                    @FormParam("maxResultsOverride") Long maxResultsOverride,
-                    @FormParam("persistence") QueryPersistence persistenceMode, @FormParam("params") String parameters) {
+                    @FormParam("maxResultsOverride") Long maxResultsOverride, @FormParam("persistence") QueryPersistence persistenceMode,
+                    @FormParam("params") String parameters) {
         GenericResponse<String> response = new GenericResponse<>();
         try {
             RunningQuery rq = getQueryById(id);
-            updateQuery(response, rq, queryLogicName, query, beginDate, endDate, queryAuthorizations, expirationDate, pagesize, pageTimeout, maxResultsOverride, persistenceMode,
-                            parameters);
+            updateQuery(response, rq, queryLogicName, query, beginDate, endDate, queryAuthorizations, expirationDate, pagesize, pageTimeout,
+                            maxResultsOverride, persistenceMode, parameters);
             
             response.setResult(id);
             return response;
@@ -2585,8 +2583,8 @@ public class QueryExecutorBean implements QueryExecutor {
     }
     
     private void updateQuery(GenericResponse<String> response, RunningQuery runningQuery, String queryLogicName, String query, Date beginDate, Date endDate,
-                    String queryAuthorizations, Date expirationDate, Integer pagesize, Integer pageTimeout, Long maxResultsOverride, QueryPersistence persistenceMode, String parameters)
-                    throws Exception {
+                    String queryAuthorizations, Date expirationDate, Integer pagesize, Integer pageTimeout, Long maxResultsOverride,
+                    QueryPersistence persistenceMode, String parameters) throws Exception {
         // Find out who/what called this method
         Principal p = ctx.getCallerPrincipal();
         String userid = p.getName();
@@ -2620,7 +2618,8 @@ public class QueryExecutorBean implements QueryExecutor {
             Query duplicate = q.duplicate(q.getQueryName());
             duplicate.setId(q.getId());
             
-            updateQueryParams(duplicate, queryLogicName, query, beginDate, endDate, queryAuthorizations, expirationDate, pagesize, pageTimeout, maxResultsOverride, parameters);
+            updateQueryParams(duplicate, queryLogicName, query, beginDate, endDate, queryAuthorizations, expirationDate, pagesize, pageTimeout,
+                            maxResultsOverride, parameters);
             
             // Fire off an audit prior to updating
             Set<String> methodAuths = new HashSet<>(Arrays.asList(q.getQueryAuthorizations().split("\\s*,\\s*")));
@@ -2644,7 +2643,8 @@ public class QueryExecutorBean implements QueryExecutor {
         }
         
         // update the actual running query
-        updateQueryParams(q, queryLogicName, query, beginDate, endDate, queryAuthorizations, expirationDate, pagesize, pageTimeout, maxResultsOverride, parameters);
+        updateQueryParams(q, queryLogicName, query, beginDate, endDate, queryAuthorizations, expirationDate, pagesize, pageTimeout, maxResultsOverride,
+                        parameters);
         
         // update the persistenceMode post audit
         if (persistenceMode != null) {

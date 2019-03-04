@@ -694,7 +694,6 @@ public class ShardQueryLogic extends BaseQueryLogic<Entry<Key,Value>> {
             }
         }
         
-
         // Get the LIMIT_FIELDS parameter if given
         String limitFields = settings.findParameter(QueryParameters.LIMIT_FIELDS).getParameterValue().trim();
         if (org.apache.commons.lang.StringUtils.isNotBlank(limitFields)) {

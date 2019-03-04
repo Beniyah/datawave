@@ -42,13 +42,13 @@ public interface QueryParameters extends ParameterValidator {
     int getPageTimeout();
     
     void setPageTimeout(int pageTimeout);
-
+    
     long getMaxResultsOverride();
-
+    
     void setMaxResultsOverride(long maxResults);
-
+    
     boolean isMaxResultsOverridden();
-
+    
     String getAuths();
     
     void setAuths(String auths);

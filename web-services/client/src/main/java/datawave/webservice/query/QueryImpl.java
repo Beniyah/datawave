@@ -271,7 +271,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     public int getPageTimeout() {
         return pageTimeout;
     }
-
+    
     public long getMaxResultsOverride() {
         return maxResultsOverride;
     }
@@ -307,7 +307,7 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
-
+    
     public void setMaxResultsOverride(long maxResults) {
         this.maxResultsOverride = maxResults;
     }
@@ -415,9 +415,10 @@ public class QueryImpl extends Query implements Serializable, Message<QueryImpl>
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37).append(this.getQueryLogicName()).append(this.getQueryName()).append(this.getExpirationDate())
-                        .append(UUID.randomUUID()).append(this.getPagesize()).append(this.getPageTimeout()).append(this.getMaxResultsOverride()).append(this.getQuery())
-                        .append(this.getQueryAuthorizations()).append(this.getUserDN()).append(this.getOwner()).append(this.getParameters())
-                        .append(this.getDnList()).append(this.getColumnVisibility()).append(this.getBeginDate()).append(this.getEndDate()).toHashCode();
+                        .append(UUID.randomUUID()).append(this.getPagesize()).append(this.getPageTimeout()).append(this.getMaxResultsOverride())
+                        .append(this.getQuery()).append(this.getQueryAuthorizations()).append(this.getUserDN()).append(this.getOwner())
+                        .append(this.getParameters()).append(this.getDnList()).append(this.getColumnVisibility()).append(this.getBeginDate())
+                        .append(this.getEndDate()).toHashCode();
     }
     
     @Override
