@@ -26,6 +26,7 @@ public class QueryParametersImpl implements QueryParameters {
     protected QueryPersistence persistenceMode;
     protected int pagesize;
     protected int pageTimeout;
+    protected boolean isMaxResultsOverridden;
     protected long maxResultsOverride;
     protected String auths;
     protected Date expirationDate;
@@ -35,8 +36,6 @@ public class QueryParametersImpl implements QueryParameters {
     protected String visibility;
     protected String logicName;
     protected MultivaluedMap<String,String> requestHeaders;
-    
-    public static final int MAX_RESULTS_OVERRIDE_UNSET = Integer.MIN_VALUE;
     
     public QueryParametersImpl() {
         clear();
@@ -63,6 +62,7 @@ public class QueryParametersImpl implements QueryParameters {
                 this.pageTimeout = Integer.parseInt(values.get(0));
             } else if (QUERY_MAX_RESULTS_OVERRIDE.equals(param)) {
                 this.maxResultsOverride = Long.parseLong(values.get(0));
+                this.isMaxResultsOverridden = true;
             } else if (QUERY_AUTHORIZATIONS.equals(param)) {
                 // ensure that auths are comma separated with no empty values or spaces
                 Splitter splitter = Splitter.on(',').omitEmptyStrings().trimResults();
@@ -115,8 +115,12 @@ public class QueryParametersImpl implements QueryParameters {
             return false;
         if (pageTimeout != that.pageTimeout)
             return false;
-        if (maxResultsOverride != that.maxResultsOverride)
+        if (isMaxResultsOverridden != that.isMaxResultsOverridden)
             return false;
+        if (isMaxResultsOverridden) {
+            if (maxResultsOverride != that.maxResultsOverride)
+                return false;
+        }
         if (trace != that.trace)
             return false;
         if (!auths.equals(that.auths))
@@ -149,7 +153,9 @@ public class QueryParametersImpl implements QueryParameters {
         result = 31 * result + persistenceMode.hashCode();
         result = 31 * result + pagesize;
         result = 31 * result + pageTimeout;
-        result = 31 * result + (int) (maxResultsOverride);
+        if (isMaxResultsOverridden) {
+            result = 31 * result + (int) (maxResultsOverride);
+        }
         result = 31 * result + auths.hashCode();
         result = 31 * result + expirationDate.hashCode();
         result = 31 * result + (trace ? 1 : 0);
@@ -361,7 +367,7 @@ public class QueryParametersImpl implements QueryParameters {
     
     @Override
     public boolean isMaxResultsOverridden() {
-        return this.maxResultsOverride != MAX_RESULTS_OVERRIDE_UNSET;
+        return this.isMaxResultsOverridden;
     }
     
     @Override
@@ -464,7 +470,7 @@ public class QueryParametersImpl implements QueryParameters {
         this.persistenceMode = QueryPersistence.TRANSIENT;
         this.pagesize = 10;
         this.pageTimeout = -1;
-        this.maxResultsOverride = MAX_RESULTS_OVERRIDE_UNSET;
+        this.isMaxResultsOverridden = false;
         this.auths = null;
         this.expirationDate = DateUtils.addDays(new Date(), 1);
         this.trace = false;
